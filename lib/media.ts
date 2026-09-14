@@ -20,15 +20,7 @@ function unsplash(id: string, alt: string): MediaAsset {
   }
 }
 
-function pexels(id: number, alt: string): MediaAsset {
-  return {
-    src: `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1800`,
-    alt,
-    source: "pexels",
-  }
-}
-
-/** Brand photography from public/images — identity / community surfaces. */
+/** Brand photography from public/images — identity / community surfaces (Douala). */
 const brand = {
   profile: local(
     "pressing-01.jpg",
@@ -65,26 +57,29 @@ const brand = {
 } as const
 
 /**
- * Hybrid catalog: brand locals for identity pages; Unsplash/Pexels for
- * service / action themes (solidarity, formation, youth, partners, etc.).
+ * Hybrid catalog: brand locals for identity; African / Cameroon-context
+ * Unsplash photos for service themes (solidarity, formation, youth, partners).
  */
 export const media = {
   community: brand.door,
+  models: brand.models,
+  street: brand.street,
+
   solidarity: unsplash(
-    "photo-1488521787991-ed7bbaae773c",
-    "Des enfants se tenant par la main"
+    "photo-1509099863731-ef4bff19e808",
+    "Des enfants africains souriants, symbole de solidarité"
   ),
   volunteers: unsplash(
-    "photo-1593113598332-cd288d649433",
-    "Des bénévoles qui trient des dons alimentaires"
+    "photo-1444664361762-afba083a4d77",
+    "Des bénévoles africains engagés sur le terrain"
   ),
   charity: unsplash(
-    "photo-1469571486292-0ba58a3f068b",
-    "Un groupe de bénévoles souriant après une action solidaire"
+    "photo-1524414621493-7dec026782c3",
+    "Une action de solidarité au sein d'une communauté africaine"
   ),
   kidsSchool: unsplash(
-    "photo-1542810634-71277d952f32",
-    "Des enfants concentrés en classe"
+    "photo-1473649085228-583485e6e4d7",
+    "Des élèves africains attentifs en classe"
   ),
   africanChildren: unsplash(
     "photo-1509099836639-18ba1795216d",
@@ -95,104 +90,101 @@ export const media = {
     "Paysage d'Afrique, acacias au coucher du soleil"
   ),
   formation: unsplash(
-    "photo-1522202176988-66273c2fd55f",
-    "Un groupe de jeunes qui travaillent ensemble autour d'un ordinateur"
+    "photo-1632215863153-0dae7657d0a9",
+    "De jeunes Africains réunis pour apprendre ensemble"
   ),
   classroom: unsplash(
-    "photo-1503676260728-1c00da094a0b",
-    "Une salle de classe, des élèves attentifs"
+    "photo-1744809482817-9a9d4fc280af",
+    "Une enseignante africaine face à sa classe"
   ),
   workshop: unsplash(
-    "photo-1531482615713-2afd69097998",
-    "Un atelier de formation autour d'ordinateurs portables"
+    "photo-1573164574572-cb89e39749b4",
+    "Des professionnels africains en atelier de formation"
   ),
   youth: unsplash(
-    "photo-1529156069898-49953e39b3ac",
-    "Un groupe de jeunes complices, assis côte à côte"
+    "photo-1624036695632-76337f9426cd",
+    "Jeunes Africains complices, énergie et avenir"
   ),
   students: unsplash(
-    "photo-1523240795612-9a054b0db644",
-    "Des étudiants réunis autour d'une table de travail"
+    "photo-1547496613-4e19af6736dc",
+    "Des étudiants africains concentrés sur leurs études"
   ),
   mentoring: unsplash(
-    "photo-1573496359142-b8d87734a5a2",
-    "Une professionnelle qui écoute et conseille"
+    "photo-1573164574397-dd250bc8a598",
+    "Une professionnelle africaine qui conseille et accompagne"
   ),
   tech: unsplash(
-    "photo-1516321318423-f06f85e504b3",
-    "Deux personnes qui collaborent devant un écran"
+    "photo-1680713660046-67b7350ed679",
+    "Une entrepreneure africaine au travail devant un écran"
   ),
   entrepreneur: unsplash(
-    "photo-1556761175-5973dc0f32e7",
-    "Une équipe en discussion autour d'un projet"
+    "photo-1655720357872-ce227e4164ba",
+    "Des entrepreneures africaines en discussion autour d'un projet"
   ),
   donation: unsplash(
     "photo-1532629345422-7515f3d16bb6",
     "Des mains qui tiennent un cœur en papier, symbole de don"
   ),
   handshake: unsplash(
-    "photo-1521791136064-7986c2920216",
-    "Une poignée de main professionnelle"
+    "photo-1596633607590-7156877ef734",
+    "Une poignée de main entre partenaires africains"
   ),
-  team: unsplash(
-    "photo-1552664730-d307ca884978",
-    "Une équipe en atelier, notes au tableau"
-  ),
+  team: brand.models,
   writing: unsplash(
-    "photo-1454165804606-c3d57bc86b40",
-    "Une personne qui planifie un projet sur un carnet"
+    "photo-1539893867126-7ce0b48971ca",
+    "Un élève africain qui écrit et prépare son avenir"
   ),
   city: unsplash(
-    "photo-1477959858617-67f85cf4f1df",
-    "Une ville éclairée au crépuscule"
+    "photo-1594386167307-e448a81529ab",
+    "Vue urbaine au Cameroun — Douala et la vie de la ville"
   ),
   sports: unsplash(
-    "photo-1461896836934-ffe607ba6851",
-    "Des jeunes qui courent ensemble sur une piste"
+    "photo-1652664845183-c6083bc286fc",
+    "Des jeunes Africains qui jouent au football"
   ),
   hands: unsplash(
     "photo-1582213782179-e0d53f98f2ca",
     "Des mains jointes, symbole d'entraide"
   ),
-  packing: pexels(
-    6646918,
-    "Des bénévoles qui préparent des colis de solidarité"
+  packing: unsplash(
+    "photo-1560220604-1985ebfe28b1",
+    "Des bénévoles africains qui préparent des colis de solidarité"
   ),
-  classroomPexels: pexels(
-    8613089,
-    "Des enfants qui apprennent en classe, crayons en main"
+  classroomPexels: unsplash(
+    "photo-1627423894921-c55a18a2de90",
+    "Des enfants africains qui apprennent en classe"
   ),
-  meeting: pexels(
-    3184418,
-    "Une équipe réunie autour d'une table de travail"
+  meeting: unsplash(
+    "photo-1573164574511-73c773193279",
+    "Une équipe africaine réunie autour d'une table de travail"
   ),
-  highFive: pexels(
-    3184465,
-    "Deux personnes qui se tapent dans la main après un succès"
+  highFive: unsplash(
+    "photo-1632215863479-201029d93143",
+    "De jeunes Africains fiers après un succès collectif"
   ),
-  study: pexels(
-    4144923,
-    "Une jeune femme qui étudie devant un ordinateur"
+  study: unsplash(
+    "photo-1666281269793-da06484657e8",
+    "Des jeunes femmes africaines avec des livres, prêtes à apprendre"
   ),
-  volunteersPexels: pexels(
-    6646917,
-    "Des bénévoles qui préparent une distribution"
+  volunteersPexels: unsplash(
+    "photo-1553775927-a071d5a6a39a",
+    "Des bénévoles africains qui préparent une distribution"
   ),
-  collaboration: pexels(
-    3184291,
-    "Des collègues qui collaborent autour d'un projet"
+  collaboration: unsplash(
+    "photo-1573164574230-db1d5e960238",
+    "Des collègues africains qui collaborent autour d'un projet"
   ),
-  circle: pexels(
-    3184338,
-    "Un cercle de personnes qui travaillent ensemble"
+  circle: unsplash(
+    "photo-1509099955921-f0b4ed0c175c",
+    "Une communauté africaine réunie, entraide et dialogue"
   ),
   family: unsplash(
-    "photo-1609220136736-443140cffec6",
-    "Une famille réunie, symbole de foyer et de solidarité"
+    "photo-1515658323406-25d61c141a6e",
+    "Une famille africaine réunie, symbole de foyer et de solidarité"
   ),
   teacher: unsplash(
-    "photo-1588072432836-e10032774318",
-    "Une enseignante devant un tableau, face à ses élèves"
+    "photo-1632215861513-130b66fe97f4",
+    "Une enseignante africaine avec ses élèves"
   ),
   books: unsplash(
     "photo-14565130808-af0986bc3505",
@@ -203,33 +195,30 @@ export const media = {
     "Des mains qui tapent du code sur un ordinateur"
   ),
   music: unsplash(
-    "photo-1511671782779-c97d3d27a1d4",
-    "Un micro sur scène, image des talents artistiques"
+    "photo-1585619443911-c2bb23fb2a49",
+    "Un musicien africain sur scène, expression des talents"
   ),
   football: unsplash(
-    "photo-1574629810360-7efbbe195818",
-    "Des jeunes qui jouent au football"
+    "photo-1652665314612-c48e10a01598",
+    "Des jeunes Africains qui jouent au football"
   ),
-  crowd: unsplash(
-    "photo-1511632765486-a01980e01a18",
-    "Une foule de personnes qui se rassemblent"
-  ),
+  crowd: brand.street,
   village: unsplash(
     "photo-1523805009345-7448845a9e53",
     "Un village africain sous un ciel clair"
   ),
   portrait: brand.profile,
   listening: unsplash(
-    "photo-1573497019940-1c28c88b4f3e",
-    "Deux personnes en conversation, écoute et conseil"
+    "photo-1573164574048-f968d7ee9f20",
+    "Deux personnes africaines en conversation, écoute et conseil"
   ),
-  kidsPlay: pexels(
-    8613313,
-    "Des enfants qui jouent et apprennent ensemble"
+  kidsPlay: unsplash(
+    "photo-1553777907-f5dbbbb44d7c",
+    "Des enfants africains qui jouent et courent ensemble"
   ),
-  notes: pexels(
-    3183197,
-    "Une équipe qui prend des notes pendant une réunion"
+  notes: unsplash(
+    "photo-1573164574308-edcb95e8b261",
+    "Une équipe africaine qui prend des notes pendant une réunion"
   ),
   collage: brand.collage,
   formal: brand.formal,

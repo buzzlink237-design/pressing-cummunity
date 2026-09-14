@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   },
   description:
     "Solidarité, formation, accompagnement et développement des talents au Cameroun. Rejoignez une communauté qui crée des opportunités concrètes pour les Camerounais.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+  },
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
