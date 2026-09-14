@@ -2,8 +2,8 @@
 
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
+  ArrowUpRight01Icon,
   Location01Icon,
-  Mail01Icon,
   WhatsappIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -31,10 +31,12 @@ const channels = [
     theme: "black" as const,
   },
   {
-    icon: Mail01Icon,
-    title: "E-mail",
-    text: "Pour les demandes détaillées, les dossiers d'adhésion, les partenariats et tout ce qui mérite un écrit.",
-    detail: site.email,
+    icon: ArrowUpRight01Icon,
+    title: "Site & réseaux",
+    text: "Retrouvez-nous en ligne et suivez les actions de la communauté sur Instagram et YouTube.",
+    detail: `${site.website} · ${site.handle}`,
+    href: site.websiteHref,
+    cta: "Visiter le site",
     theme: "white" as const,
   },
   {
@@ -140,14 +142,14 @@ export function ContactView({ defaultSubject }: { defaultSubject?: ContactSubjec
                   Suivez nos actions
                 </p>
                 <p className="mt-3 text-lg leading-relaxed text-white/80">
-                  Les comptes seront publiés ici dès qu’ils seront ouverts.
+                  {site.handle} — Instagram et YouTube.
                 </p>
                 <ul className="mt-5 divide-y divide-white/15">
                   {socialLinks.map((item) => (
                     <li key={item.label}>
                       <ChannelRow
                         label={item.label}
-                        value="Bientôt"
+                        value={site.handle}
                         href={item.href}
                         inverted
                       />

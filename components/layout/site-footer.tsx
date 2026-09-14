@@ -1,10 +1,7 @@
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Facebook01Icon,
   InstagramIcon,
-  Linkedin01Icon,
-  TiktokIcon,
   YoutubeIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -19,11 +16,8 @@ import {
 import { BrandMark } from "./brand-mark"
 
 const socialIcons = {
-  Facebook: Facebook01Icon,
   Instagram: InstagramIcon,
-  TikTok: TiktokIcon,
   YouTube: YoutubeIcon,
-  LinkedIn: Linkedin01Icon,
 }
 
 export function SiteFooter() {
@@ -83,8 +77,17 @@ export function SiteFooter() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange">Nous joindre</p>
           <ul className="mt-5 space-y-3 text-base text-white/80">
-            <li className="break-words">WhatsApp : {site.whatsapp}</li>
-            <li className="break-all sm:break-normal">E-mail : {site.email}</li>
+            <li className="break-words">
+              <a href={site.whatsappHref} className="hover:text-white hover:underline">
+                WhatsApp : {site.whatsapp}
+              </a>
+            </li>
+            <li className="break-all sm:break-normal">
+              <a href={site.websiteHref} className="hover:text-white hover:underline">
+                {site.website}
+              </a>
+            </li>
+            <li className="break-words">{site.handle}</li>
             <li className="break-words">Adresse : {site.address}</li>
           </ul>
           <div className="mt-6 sm:mt-8 flex items-center gap-3">

@@ -121,7 +121,7 @@ export function SiteHeader() {
             <BravoNavLink
               className={cn(
                 buttonVariants(),
-                "hidden h-10 rounded-full px-4 text-sm font-sans font-semibold md:inline-flex",
+                "inline-flex h-10 rounded-full px-3 text-sm font-sans font-semibold sm:px-4",
                 solid || lightHero
                   ? "bg-teal text-white hover:bg-teal-deep"
                   : "bg-white text-ink hover:bg-white/90"

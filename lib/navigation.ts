@@ -14,10 +14,12 @@ export const site = {
   baseline: "Une communauté. Des opportunités. Un impact.",
   city: "Douala, Cameroun",
   registration: "Statut juridique et numéro d'enregistrement …",
-  whatsapp: "…",
-  email: "…",
-  address: "…",
-  whatsappHref: "#",
+  whatsapp: "00 237 678 014 289",
+  whatsappHref: "https://wa.me/237678014289",
+  website: "www.pressing-community.org",
+  websiteHref: "https://www.pressing-community.org",
+  handle: "@lapressingcommunity",
+  address: "Douala, Cameroun",
   signature: "Chaque opportunité peut changer une vie. Construisons-les ensemble.",
 }
 
@@ -105,9 +107,6 @@ export const legalLinks: NavLink[] = [
 ]
 
 export const socialLinks: NavLink[] = [
-  { label: "Facebook", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/lapressingcommunity" },
+  { label: "YouTube", href: "https://www.youtube.com/@lapressingcommunity" },
 ]
