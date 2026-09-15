@@ -37,6 +37,7 @@ import {
 } from "@/lib/bravo/schema"
 import { cn } from "@/lib/utils"
 
+import { BravoCountdown } from "./bravo-countdown"
 import { CheckRow, ChoiceGroup, SelectField, TextField } from "./bravo-fields"
 
 const SECTIONS = [
@@ -70,11 +71,13 @@ function persistDraft(values: BravoFormInput) {
 export function BravoForm({
   utm,
   canSubmit,
+  showCountdown,
   closedMessage,
   onSubmitted,
 }: {
   utm: BravoUtm
   canSubmit: boolean
+  showCountdown?: boolean
   closedMessage?: string
   onSubmitted: (result: { numero: string; prenom: string }) => void
 }) {
@@ -660,7 +663,9 @@ export function BravoForm({
         </p>
       ) : null}
 
-      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+      {last && !canSubmit && showCountdown ? <BravoCountdown className="mt-7" /> : null}
+
+      <div className={cn("flex flex-col gap-3 sm:flex-row", last && !canSubmit && showCountdown ? "mt-4" : "mt-7")}>
         {section > 0 ? (
           <Button
             type="button"
@@ -681,11 +686,11 @@ export function BravoForm({
               ? "Envoi…"
               : canSubmit
                 ? "Envoyer ma candidature"
-                : "Inscription pas encore ouverte"
+                : "Inscription le 21 septembre"
             : "Continuer"}
         </Button>
       </div>
-      {last && !canSubmit && closedMessage ? (
+      {last && !canSubmit && closedMessage && !showCountdown ? (
         <p className="mt-3 text-sm leading-relaxed text-ink/55">{closedMessage}</p>
       ) : null}
     </form>

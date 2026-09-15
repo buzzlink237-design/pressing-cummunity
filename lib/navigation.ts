@@ -16,6 +16,8 @@ export const site = {
   registration: "Statut juridique et numéro d'enregistrement …",
   whatsapp: "00 237 678 014 289",
   whatsappHref: "https://wa.me/237678014289",
+  email: "contact@pressing-community.org",
+  emailHref: "mailto:contact@pressing-community.org",
   website: "www.pressing-community.org",
   websiteHref: "https://www.pressing-community.org",
   handle: "@lapressingcommunity",
@@ -106,7 +108,15 @@ export const legalLinks: NavLink[] = [
   { label: "Conditions d'adhésion", href: "/conditions-adhesion" },
 ]
 
-export const socialLinks: NavLink[] = [
-  { label: "Instagram", href: "https://www.instagram.com/lapressingcommunity" },
-  { label: "YouTube", href: "https://www.youtube.com/@lapressingcommunity" },
-]
+const socialEnv = [
+  { label: "Instagram", env: "NEXT_PUBLIC_SOCIAL_INSTAGRAM" },
+  { label: "Facebook", env: "NEXT_PUBLIC_SOCIAL_FACEBOOK" },
+  { label: "YouTube", env: "NEXT_PUBLIC_SOCIAL_YOUTUBE" },
+  { label: "TikTok", env: "NEXT_PUBLIC_SOCIAL_TIKTOK" },
+] as const
+
+/** Only networks with a non-empty env URL are returned — unset = hidden. */
+export const socialLinks: NavLink[] = socialEnv.flatMap(({ label, env }) => {
+  const href = process.env[env]?.trim()
+  return href ? [{ label, href }] : []
+})

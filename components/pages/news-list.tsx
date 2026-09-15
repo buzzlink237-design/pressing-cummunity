@@ -26,9 +26,7 @@ export function NewsListView() {
             <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75">
               Nos actions, nos formations et les opportunités de la communauté.
               Ici, nous racontons ce qui se passe vraiment : un lancement, une
-              action de solidarité, une session, un appel. Les photos sont
-              encore des visuels temporaires : les images de terrain les
-              remplaceront.
+              action de solidarité, une session, un appel.
             </p>
           </FadeIn>
         </PanelContent>

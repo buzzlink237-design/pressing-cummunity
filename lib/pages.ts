@@ -117,7 +117,7 @@ export const nosActions: PagePlaceholderProps = {
       title: "Les 5 axes",
       subtitle: "Cliquez pour entrer dans chaque programme",
       layout: "cards",
-      body: "Chaque axe a sa page, ses publics, sa manière d'agir. Les visuels ci-dessous sont des placeholders : les photos de terrain les remplaceront.",
+      body: "Chaque axe a sa page, ses publics, sa manière d'agir.",
       items: actionAxes,
     },
     {
@@ -148,7 +148,6 @@ export const solidarite: PagePlaceholderProps = {
       layout: "cards",
       body: [
         "Nous commençons là où le besoin est le plus immédiat, à Douala et dans les communautés qui nous sollicitent. Ces publics ne sont pas des « cibles » : ce sont des personnes, des foyers, des structures avec qui il faut parler avant d'agir.",
-        "Les photos ci-dessous sont des visuels temporaires. Les images de nos actions de terrain les remplaceront.",
       ],
       items: solidarityAudiences,
     },
@@ -269,7 +268,7 @@ export const jeunesse: PagePlaceholderProps = {
     {
       title: "BRAVO 2026",
       body: [
-        "Vingt jeunes qui ont obtenu leur Baccalauréat ou leur GCE Advanced Level en 2026 recevront 50 000 FCFA chacun. Dix francophones, dix anglophones, de toutes les régions. L'inscription est gratuite, sans compte à créer, jusqu'au dimanche 20 septembre à minuit.",
+        "Vingt jeunes qui ont obtenu leur Baccalauréat ou leur GCE Advanced Level en 2026 recevront 50 000 FCFA chacun. Dix francophones, dix anglophones, de toutes les régions. L'inscription est gratuite, sans compte à créer, du lundi 21 au vendredi 25 septembre à minuit.",
         "Nous ne demandons jamais d'argent. Si quelqu'un vous en réclame en notre nom, c'est une escroquerie.",
       ],
       ctas: [{ label: "Déposer ma candidature", href: "/bravo-2026" }],
@@ -503,8 +502,8 @@ export const contact: PagePlaceholderProps = {
     {
       title: "Moyens de contact",
       items: [
-        { title: "WhatsApp", text: "La façon la plus rapide de nous joindre. Numéro …" },
-        { title: "E-mail", text: "Pour les demandes détaillées et les dossiers. Adresse …" },
+        { title: "WhatsApp", text: "La façon la plus rapide de nous joindre. 00 237 678 014 289" },
+        { title: "E-mail", text: "Pour les demandes détaillées et les dossiers. contact@pressing-community.org" },
         { title: "Nous rencontrer", text: "Adresse du siège, Douala …" },
       ],
     },

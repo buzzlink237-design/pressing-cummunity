@@ -24,4 +24,4 @@ export {
   type BravoFormInput,
   type BravoUtm,
 } from "./schema"
-export { getBravoWindow, isBravoOpen, type BravoWindowStatus } from "./window"
+export { getBravoCountdown, getBravoWindow, isBravoOpen, type BravoWindowStatus } from "./window"

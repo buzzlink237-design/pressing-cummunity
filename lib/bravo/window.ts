@@ -1,12 +1,20 @@
 export const BRAVO_TIMEZONE = "Africa/Douala"
 
-/** Monday 7 September 2026, 00:00 WAT */
-export const BRAVO_OPENS_AT = "2026-09-07T00:00:00+01:00"
+/** Monday 21 September 2026, 00:00 WAT */
+export const BRAVO_OPENS_AT = "2026-09-21T00:00:00+01:00"
 
-/** Closes Sunday 20 September at midnight WAT (start of 21 Sept). */
-export const BRAVO_CLOSES_AT = "2026-09-21T00:00:00+01:00"
+/** Closes Friday 25 September at midnight WAT (start of 26 Sept, day of the live). */
+export const BRAVO_CLOSES_AT = "2026-09-26T00:00:00+01:00"
 
 export type BravoWindowStatus = "soon" | "open" | "closed"
+
+export type BravoCountdown = {
+  totalMs: number
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
 
 export function isBravoForceOpen() {
   return process.env.NEXT_PUBLIC_BRAVO_FORCE_OPEN === "1"
@@ -21,6 +29,18 @@ export function getBravoWindow(now = Date.now()): BravoWindowStatus {
 
 export function isBravoOpen(now = Date.now()) {
   return getBravoWindow(now) === "open"
+}
+
+export function getBravoCountdown(now = Date.now()): BravoCountdown {
+  const totalMs = Math.max(0, Date.parse(BRAVO_OPENS_AT) - now)
+  const totalSeconds = Math.floor(totalMs / 1000)
+  return {
+    totalMs,
+    days: Math.floor(totalSeconds / 86400),
+    hours: Math.floor((totalSeconds % 86400) / 3600),
+    minutes: Math.floor((totalSeconds % 3600) / 60),
+    seconds: totalSeconds % 60,
+  }
 }
 
 export function formatWatTimestamp(date = new Date()) {

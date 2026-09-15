@@ -4,7 +4,6 @@ import { useState } from "react"
 
 import type { BravoPublicCopy } from "@/lib/bravo/config"
 import { emptyUtm, type BravoUtm } from "@/lib/bravo/schema"
-import { getBravoWindow } from "@/lib/bravo/window"
 import {
   ImageField,
   PanelContent,
@@ -15,6 +14,7 @@ import { FadeIn } from "@/components/motion/fade-in"
 import { CtaLink, CtaRow } from "@/components/ui/cta-link"
 
 import { BravoConfirm } from "./bravo-confirm"
+import { useBravoWindow } from "./bravo-countdown"
 import { BravoForm } from "./bravo-form"
 import { BravoIntro } from "./bravo-intro"
 
@@ -42,7 +42,7 @@ export function BravoCampaign({
   utm: BravoUtm
   copy: BravoPublicCopy
 }) {
-  const status = getBravoWindow()
+  const status = useBravoWindow()
   const [step, setStep] = useState<Step>("intro")
   const [numero, setNumero] = useState("")
   const [resolvedUtm, setResolvedUtm] = useState(utm)
@@ -94,9 +94,10 @@ export function BravoCampaign({
               <BravoForm
                 utm={resolvedUtm}
                 canSubmit={status === "open"}
+                showCountdown={status === "soon"}
                 closedMessage={
                   status === "soon"
-                    ? "L'inscription ouvre le lundi 7 septembre 2026. Votre saisie est déjà enregistrée sur cet appareil."
+                    ? "L'inscription ouvre le lundi 21 septembre 2026 à minuit. Votre saisie est déjà enregistrée sur cet appareil."
                     : "Les candidatures sont closes."
                 }
                 onSubmitted={({ numero: assigned }) => {

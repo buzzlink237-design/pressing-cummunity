@@ -56,71 +56,116 @@ const brand = {
   ),
 } as const
 
+/** Action-theme photography from public/images/solidarities. */
+const themes = {
+  solidarityCover: local(
+    "solidarities/pc-a1-solidarite-proposition-7-jeunes-don-orphelinat-tshirts-4k12.png",
+    "Jeunes de La Pressing Community en don à un orphelinat"
+  ),
+  orphanageGift: local(
+    "solidarities/pc-a1-solidarite-proposition-4-don-orphelinat-4k7.png",
+    "Don à un orphelinat — solidarité de La Pressing Community"
+  ),
+  renovation: local(
+    "solidarities/pc-a1-solidarite-proposition-5-jeunes-renovation-tshirts-4k10.png",
+    "Jeunes bénévoles en t-shirts lors d'une rénovation"
+  ),
+  bloodDrive: local(
+    "solidarities/pc-a1-solidarite-proposition-6-jeunes-don-sang-tshirts-4k1.png",
+    "Jeunes de La Pressing Community lors d'un don de sang"
+  ),
+  orphanageTeam: local(
+    "solidarities/pc-a1-solidarite-proposition-7-jeunes-don-orphelinat-tshirts-4k11.png",
+    "Équipe de jeunes en don à un orphelinat"
+  ),
+  library: local(
+    "solidarities/pc-i2-solidarite-proposition-1-bibliotheque-4k1.png",
+    "Bibliothèque communautaire — action de solidarité"
+  ),
+  communityGarden: local(
+    "solidarities/pc-i2-solidarite-proposition-3-jardin-communautaire-4k8.png",
+    "Jardin communautaire — solidarité et entraide"
+  ),
+  digitalWorkshop: local(
+    "solidarities/pc-a2-formation-proposition-1-atelier-numerique-4k3.png",
+    "Atelier numérique de formation"
+  ),
+  entrepreneurship: local(
+    "solidarities/pc-a2-formation-proposition-2-entrepreneuriat-4k2.png",
+    "Session de formation à l'entrepreneuriat"
+  ),
+  contentCreation: local(
+    "solidarities/pc-a2-formation-proposition-3-creation-contenu-4k1.png",
+    "Atelier de création de contenu"
+  ),
+  mentor: local(
+    "solidarities/pc-i3-accompagnement-proposition-2-mentor-cravate-4k1.png",
+    "Mentorat et accompagnement personnalisé"
+  ),
+  smartCasual: local(
+    "solidarities/pc-i3-accompagnement-proposition-3-smart-casual-4k1.png",
+    "Accompagnement en entretien — écoute et conseil"
+  ),
+  seamstress: local(
+    "solidarities/pc-i5-talent-proposition-1-couturiere-cliente-4k1.png",
+    "Couturière avec une cliente — talents camerounais"
+  ),
+  mechanic: local(
+    "solidarities/pc-a3-talents-proposition-2-mecanique-4k1.png",
+    "Atelier de mécanique — talents et savoir-faire"
+  ),
+  apprentice: local(
+    "solidarities/pc-i5-talent-proposition-2-mecanicien-apprenti-4k4.png",
+    "Mécanicien et apprenti — transmission d'un talent"
+  ),
+  producer: local(
+    "solidarities/pc-i5-talent-proposition-3-productrice-artiste-4k13.png",
+    "Productrice et artiste — expression des talents"
+  ),
+  producerAlt: local(
+    "solidarities/pc-i5-talent-proposition-3-productrice-artiste-4k6.png",
+    "Productrice et artiste au travail"
+  ),
+  youthCourtyard: local(
+    "solidarities/pc-a4-jeunesse-proposition-1-discussion-cour-4k1.png",
+    "Discussion entre jeunes dans une cour"
+  ),
+  youthWorkshop: local(
+    "solidarities/pc-a4-jeunesse-proposition-2-atelier-participatif-4k5.png",
+    "Atelier participatif jeunesse"
+  ),
+  youthTerrace: local(
+    "solidarities/pc-a4-jeunesse-proposition-3-terrasse-douala-4k9.png",
+    "Jeunes sur une terrasse à Douala"
+  ),
+} as const
+
 /**
- * Hybrid catalog: brand locals for identity; African / Cameroon-context
- * Unsplash photos for service themes (solidarity, formation, youth, partners).
+ * Hybrid catalog: brand locals for identity; solidarities locals for action
+ * themes; Unsplash kept for remaining generic surfaces.
  */
 export const media = {
   community: brand.door,
   models: brand.models,
   street: brand.street,
 
-  solidarity: unsplash(
-    "photo-1509099863731-ef4bff19e808",
-    "Des enfants africains souriants, symbole de solidarité"
-  ),
-  volunteers: unsplash(
-    "photo-1444664361762-afba083a4d77",
-    "Des bénévoles africains engagés sur le terrain"
-  ),
-  charity: unsplash(
-    "photo-1524414621493-7dec026782c3",
-    "Une action de solidarité au sein d'une communauté africaine"
-  ),
-  kidsSchool: unsplash(
-    "photo-1473649085228-583485e6e4d7",
-    "Des élèves africains attentifs en classe"
-  ),
-  africanChildren: unsplash(
-    "photo-1509099836639-18ba1795216d",
-    "Des enfants africains souriant ensemble"
-  ),
+  solidarity: themes.solidarityCover,
+  volunteers: themes.orphanageTeam,
+  charity: themes.bloodDrive,
+  kidsSchool: themes.library,
+  africanChildren: themes.orphanageGift,
   landscape: unsplash(
     "photo-1547471080-7cc2caa01a7e",
     "Paysage d'Afrique, acacias au coucher du soleil"
   ),
-  formation: unsplash(
-    "photo-1632215863153-0dae7657d0a9",
-    "De jeunes Africains réunis pour apprendre ensemble"
-  ),
-  classroom: unsplash(
-    "photo-1744809482817-9a9d4fc280af",
-    "Une enseignante africaine face à sa classe"
-  ),
-  workshop: unsplash(
-    "photo-1573164574572-cb89e39749b4",
-    "Des professionnels africains en atelier de formation"
-  ),
-  youth: unsplash(
-    "photo-1624036695632-76337f9426cd",
-    "Jeunes Africains complices, énergie et avenir"
-  ),
-  students: unsplash(
-    "photo-1547496613-4e19af6736dc",
-    "Des étudiants africains concentrés sur leurs études"
-  ),
-  mentoring: unsplash(
-    "photo-1573164574397-dd250bc8a598",
-    "Une professionnelle africaine qui conseille et accompagne"
-  ),
-  tech: unsplash(
-    "photo-1680713660046-67b7350ed679",
-    "Une entrepreneure africaine au travail devant un écran"
-  ),
-  entrepreneur: unsplash(
-    "photo-1655720357872-ce227e4164ba",
-    "Des entrepreneures africaines en discussion autour d'un projet"
-  ),
+  formation: themes.contentCreation,
+  classroom: themes.entrepreneurship,
+  workshop: themes.digitalWorkshop,
+  youth: themes.youthCourtyard,
+  students: themes.seamstress,
+  mentoring: themes.mentor,
+  tech: themes.producerAlt,
+  entrepreneur: themes.mechanic,
   donation: unsplash(
     "photo-1532629345422-7515f3d16bb6",
     "Des mains qui tiennent un cœur en papier, symbole de don"
@@ -138,38 +183,20 @@ export const media = {
     "photo-1594386167307-e448a81529ab",
     "Vue urbaine au Cameroun — Douala et la vie de la ville"
   ),
-  sports: unsplash(
-    "photo-1652664845183-c6083bc286fc",
-    "Des jeunes Africains qui jouent au football"
-  ),
+  sports: themes.youthTerrace,
   hands: unsplash(
     "photo-1582213782179-e0d53f98f2ca",
     "Des mains jointes, symbole d'entraide"
   ),
-  packing: unsplash(
-    "photo-1560220604-1985ebfe28b1",
-    "Des bénévoles africains qui préparent des colis de solidarité"
-  ),
-  classroomPexels: unsplash(
-    "photo-1627423894921-c55a18a2de90",
-    "Des enfants africains qui apprennent en classe"
-  ),
+  packing: themes.renovation,
+  classroomPexels: themes.youthWorkshop,
   meeting: unsplash(
     "photo-1573164574511-73c773193279",
     "Une équipe africaine réunie autour d'une table de travail"
   ),
-  highFive: unsplash(
-    "photo-1632215863479-201029d93143",
-    "De jeunes Africains fiers après un succès collectif"
-  ),
-  study: unsplash(
-    "photo-1666281269793-da06484657e8",
-    "Des jeunes femmes africaines avec des livres, prêtes à apprendre"
-  ),
-  volunteersPexels: unsplash(
-    "photo-1553775927-a071d5a6a39a",
-    "Des bénévoles africains qui préparent une distribution"
-  ),
+  highFive: themes.apprentice,
+  study: themes.contentCreation,
+  volunteersPexels: themes.communityGarden,
   collaboration: unsplash(
     "photo-1573164574230-db1d5e960238",
     "Des collègues africains qui collaborent autour d'un projet"
@@ -194,10 +221,7 @@ export const media = {
     "photo-1517694712202-14dd9538aa97",
     "Des mains qui tapent du code sur un ordinateur"
   ),
-  music: unsplash(
-    "photo-1585619443911-c2bb23fb2a49",
-    "Un musicien africain sur scène, expression des talents"
-  ),
+  music: themes.producer,
   football: unsplash(
     "photo-1652665314612-c48e10a01598",
     "Des jeunes Africains qui jouent au football"
@@ -208,10 +232,7 @@ export const media = {
     "Un village africain sous un ciel clair"
   ),
   portrait: brand.profile,
-  listening: unsplash(
-    "photo-1573164574048-f968d7ee9f20",
-    "Deux personnes africaines en conversation, écoute et conseil"
-  ),
+  listening: themes.smartCasual,
   kidsPlay: unsplash(
     "photo-1553777907-f5dbbbb44d7c",
     "Des enfants africains qui jouent et courent ensemble"

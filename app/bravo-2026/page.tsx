@@ -5,7 +5,7 @@ import { parseUtmFromSearch } from "@/lib/bravo/schema"
 export const metadata = {
   title: "BRAVO 2026 — Candidature",
   description:
-    "Vingt jeunes qui ont obtenu leur Baccalauréat ou leur GCE Advanced Level en 2026 recevront 50 000 FCFA. Inscription gratuite, jusqu'au 20 septembre.",
+    "Vingt jeunes qui ont obtenu leur Baccalauréat ou leur GCE Advanced Level en 2026 recevront 50 000 FCFA. Inscription gratuite, à partir du 21 septembre.",
 }
 
 type BravoPageProps = {

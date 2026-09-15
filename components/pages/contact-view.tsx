@@ -4,6 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import {
   ArrowUpRight01Icon,
   Location01Icon,
+  Mail01Icon,
   WhatsappIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -20,6 +21,8 @@ import { CtaLink, CtaRow } from "@/components/ui/cta-link"
 import { site, socialLinks } from "@/lib/navigation"
 import { cn } from "@/lib/utils"
 
+const socialNames = socialLinks.map((item) => item.label).join(", ")
+
 const channels = [
   {
     icon: WhatsappIcon,
@@ -31,9 +34,20 @@ const channels = [
     theme: "black" as const,
   },
   {
+    icon: Mail01Icon,
+    title: "E-mail",
+    text: "Pour les demandes détaillées, les dossiers et tout ce qui doit rester par écrit.",
+    detail: site.email,
+    href: site.emailHref,
+    cta: "Écrire un e-mail",
+    theme: "white" as const,
+  },
+  {
     icon: ArrowUpRight01Icon,
     title: "Site & réseaux",
-    text: "Retrouvez-nous en ligne et suivez les actions de la communauté sur Instagram et YouTube.",
+    text: socialNames
+      ? `Retrouvez-nous en ligne et suivez les actions de la communauté sur ${socialNames}.`
+      : "Retrouvez-nous en ligne sur le site de la communauté.",
     detail: `${site.website} · ${site.handle}`,
     href: site.websiteHref,
     cta: "Visiter le site",
@@ -137,26 +151,29 @@ export function ContactView({ defaultSubject }: { defaultSubject?: ContactSubjec
                 </ul>
               </div>
 
-              <div className="mt-6 rounded-[1.75rem] bg-teal p-6 text-white sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-orange">
-                  Suivez nos actions
-                </p>
-                <p className="mt-3 text-lg leading-relaxed text-white/80">
-                  {site.handle} — Instagram et YouTube.
-                </p>
-                <ul className="mt-5 divide-y divide-white/15">
-                  {socialLinks.map((item) => (
-                    <li key={item.label}>
-                      <ChannelRow
-                        label={item.label}
-                        value={site.handle}
-                        href={item.href}
-                        inverted
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {socialLinks.length > 0 ? (
+                <div className="mt-6 rounded-[1.75rem] bg-teal p-6 text-white sm:p-7">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-orange">
+                    Suivez nos actions
+                  </p>
+                  <p className="mt-3 text-lg leading-relaxed text-white/80">
+                    {site.handle}
+                    {socialNames ? ` — ${socialNames}.` : "."}
+                  </p>
+                  <ul className="mt-5 divide-y divide-white/15">
+                    {socialLinks.map((item) => (
+                      <li key={item.label}>
+                        <ChannelRow
+                          label={item.label}
+                          value={site.handle}
+                          href={item.href}
+                          inverted
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </aside>
           </div>
         </div>

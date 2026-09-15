@@ -32,7 +32,7 @@ export function HeroMosaic() {
           <StaggerItem className="h-full min-h-0">
             <PhotoCard
               href="/nos-actions/solidarite"
-              image="community"
+              image="solidarity"
               kicker="Solidarité"
               title="Orphelinats, veuves et familles à Douala"
               tab="tr"
@@ -48,7 +48,7 @@ export function HeroMosaic() {
           <StaggerItem className="h-full min-h-0">
             <PhotoCard
               href="/nos-actions/formation"
-              image="team"
+              image="workshop"
               kicker="Formation"
               title="Anglais, TCF, IA et entrepreneuriat"
               tab="tr"
@@ -80,7 +80,7 @@ function MobileMosaic() {
       <div className="grid h-[20.5rem] grid-cols-[1.15fr_0.85fr] gap-2.5 sm:h-[26rem]">
         <PhotoCard
           href="/nos-actions/solidarite"
-          image="community"
+          image="solidarity"
           kicker="Solidarité"
           title="Aider à Douala"
           tab="tr"
@@ -90,7 +90,7 @@ function MobileMosaic() {
         <div className="flex min-h-0 flex-col gap-2.5">
           <PhotoCard
             href="/nos-actions/formation"
-            image="team"
+            image="workshop"
             kicker="Formation"
             title="Se former"
             tab="tl"
@@ -103,7 +103,7 @@ function MobileMosaic() {
       <div className="scrollbar-none -mx-3.5 flex gap-2.5 overflow-x-auto overscroll-x-contain px-3.5 pb-1 sm:-mx-6 sm:px-6">
         <PhotoCard
           href="/nos-actions/talents"
-          image="youth"
+          image="students"
           kicker="Talents"
           title="Donner une chance"
           tab="tr"
@@ -111,7 +111,7 @@ function MobileMosaic() {
         />
         <PhotoCard
           href="/nos-actions/jeunesse"
-          image="students"
+          image="youth"
           kicker="Jeunesse"
           title="Construire son autonomie"
           tab="tl"

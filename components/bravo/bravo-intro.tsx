@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import type { BravoWindowStatus } from "@/lib/bravo/window"
 import { cn } from "@/lib/utils"
 
+import { BravoCountdown } from "./bravo-countdown"
+
 const facts = [
   {
     fr: "20 jeunes · 50 000 FCFA chacun",
@@ -110,12 +112,7 @@ export function BravoIntro({
         </p>
       ) : (
         <div className="mt-8 max-w-xl">
-          {status === "soon" ? (
-            <p className="mb-4 text-base leading-relaxed text-ink/70 sm:text-lg">
-              Ouverture lundi 7 septembre. Vous pouvez déjà préparer votre
-              dossier ; l&apos;envoi ne sera possible qu&apos;à l&apos;ouverture.
-            </p>
-          ) : null}
+          {status === "soon" ? <BravoCountdown className="mb-4" /> : null}
           <Button
             type="button"
             onClick={onStart}

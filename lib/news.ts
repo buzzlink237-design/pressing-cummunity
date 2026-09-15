@@ -15,7 +15,7 @@ export const newsArticles: NewsArticle[] = [
     slug: "bravo-2026",
     title: "BRAVO 2026 : 50 000 FCFA pour vingt bacheliers et titulaires du GCE",
     excerpt:
-      "Inscription gratuite jusqu'au 20 septembre. Dix francophones, dix anglophones, de toutes les régions. L'argent est versé au parent, en direct le 26 septembre.",
+      "Inscription gratuite à partir du 21 septembre. Dix francophones, dix anglophones, de toutes les régions. L'argent est versé au parent, en direct le 26 septembre.",
     date: "2026-09-05",
     category: "Jeunesse",
     image: "students",
@@ -23,7 +23,7 @@ export const newsArticles: NewsArticle[] = [
       "Vous avez réussi le Baccalauréat ou le GCE Advanced Level en 2026. BRAVO 2026 veut que ça compte : vingt jeunes recevront 50 000 FCFA chacun, dix francophones et dix anglophones, de toutes les régions du Cameroun.",
       "La sélection ne se fait pas sur la moyenne. Avoir réussi suffit. Le départage se fait sur le sous-système, la région de l'établissement, le besoin immédiat à la rentrée, et le fait d'être le premier de la famille dans le supérieur.",
       "L'inscription est gratuite et prend moins de cinq minutes. Pas de compte à créer. L'argent n'est jamais versé au candidat : il part sur le Mobile Money du parent ou du responsable. The Pressing Community ne demande jamais d'argent. Si quelqu'un vous en réclame en notre nom, c'est une escroquerie.",
-      "Les candidatures ferment le dimanche 20 septembre à minuit. Les vingt noms seront annoncés le samedi 26 septembre à 20 h 30, en direct. Déposez votre dossier depuis la page BRAVO 2026.",
+      "Les candidatures ouvrent le lundi 21 septembre et ferment le vendredi 25 septembre à minuit. Les vingt noms seront annoncés le samedi 26 septembre à 20 h 30, en direct. Déposez votre dossier depuis la page BRAVO 2026.",
     ],
   },
   {

@@ -1,7 +1,9 @@
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
+  Facebook01Icon,
   InstagramIcon,
+  TiktokIcon,
   YoutubeIcon,
 } from "@hugeicons/core-free-icons"
 
@@ -17,7 +19,9 @@ import { BrandMark } from "./brand-mark"
 
 const socialIcons = {
   Instagram: InstagramIcon,
+  Facebook: Facebook01Icon,
   YouTube: YoutubeIcon,
+  TikTok: TiktokIcon,
 }
 
 export function SiteFooter() {
@@ -83,6 +87,11 @@ export function SiteFooter() {
               </a>
             </li>
             <li className="break-all sm:break-normal">
+              <a href={site.emailHref} className="hover:text-white hover:underline">
+                {site.email}
+              </a>
+            </li>
+            <li className="break-all sm:break-normal">
               <a href={site.websiteHref} className="hover:text-white hover:underline">
                 {site.website}
               </a>
@@ -90,21 +99,26 @@ export function SiteFooter() {
             <li className="break-words">{site.handle}</li>
             <li className="break-words">Adresse : {site.address}</li>
           </ul>
-          <div className="mt-6 sm:mt-8 flex items-center gap-3">
-            {socialLinks.map((item) => {
-              const icon = socialIcons[item.label as keyof typeof socialIcons]
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-label={item.label}
-                  className="grid size-10 place-items-center rounded-full bg-white/5 transition hover:bg-teal/40"
-                >
-                  <HugeiconsIcon icon={icon} strokeWidth={2} className="size-4" />
-                </Link>
-              )
-            })}
-          </div>
+          {socialLinks.length > 0 ? (
+            <div className="mt-6 sm:mt-8 flex items-center gap-3">
+              {socialLinks.map((item) => {
+                const icon = socialIcons[item.label as keyof typeof socialIcons]
+                if (!icon) return null
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="grid size-10 place-items-center rounded-full bg-white/5 transition hover:bg-teal/40"
+                  >
+                    <HugeiconsIcon icon={icon} strokeWidth={2} className="size-4" />
+                  </Link>
+                )
+              })}
+            </div>
+          ) : null}
         </div>
       </div>
 
