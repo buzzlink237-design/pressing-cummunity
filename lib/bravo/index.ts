@@ -13,6 +13,7 @@ export {
   formatPhoneInput,
   normalizeCameroonPhone,
 } from "./phone"
+export { isBirthDateOutOfRange, parseBirthDateIso } from "./birth"
 export {
   BRAVO_SECTION_FIELDS,
   bravoFormSchema,

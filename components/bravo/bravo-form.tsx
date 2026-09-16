@@ -22,9 +22,8 @@ import {
   SEXES,
   SOUS_SYSTEMES,
   USAGE_DON_MAX,
-  BIRTH_MAX,
-  BIRTH_MIN,
 } from "@/lib/bravo/constants"
+import { isBirthDateOutOfRange } from "@/lib/bravo/birth"
 import { PARENT_SECTION_INTRO } from "@/lib/bravo/messages"
 import { formatPhoneInput, normalizeCameroonPhone } from "@/lib/bravo/phone"
 import {
@@ -117,7 +116,7 @@ export function BravoForm({
   const candidatePhone = normalizeCameroonPhone(candidatWhatsapp)
   const parentPhone = normalizeCameroonPhone(parentMomo)
   const sameNumber = Boolean(candidatePhone && parentPhone && candidatePhone === parentPhone)
-  const ageFlag = Boolean(naissance && (naissance < BIRTH_MIN || naissance > BIRTH_MAX))
+  const ageFlag = isBirthDateOutOfRange(naissance)
   const progress = useMemo(() => ((section + 1) / SECTIONS.length) * 100, [section])
   const current = SECTIONS[section]
   const last = section === SECTIONS.length - 1
@@ -313,24 +312,15 @@ export function BravoForm({
             error={errors.candidat_prenom?.message}
             {...register("candidat_prenom")}
           />
-          <Field
+          <TextField
             id="candidat_naissance"
             label="Date de naissance / Date of birth"
+            placeholder="ex. 15/03/2005 ou 2005-03-15"
+            autoComplete="bday"
+            inputMode="text"
             error={errors.candidat_naissance?.message}
-          >
-            <Input
-              id="candidat_naissance"
-              type="date"
-              aria-invalid={errors.candidat_naissance ? true : undefined}
-              aria-describedby={fieldDescribedBy(
-                "candidat_naissance",
-                undefined,
-                errors.candidat_naissance?.message
-              )}
-              className={cn(fieldControlClass, errors.candidat_naissance && "border-red-300")}
-              {...register("candidat_naissance")}
-            />
-          </Field>
+            {...register("candidat_naissance")}
+          />
           {ageFlag ? (
             <p className="rounded-xl bg-orange/15 px-3 py-2 text-sm leading-relaxed text-ink/80">
               Cette date est hors des bornes habituelles (2000–2011). Vous pouvez envoyer : le

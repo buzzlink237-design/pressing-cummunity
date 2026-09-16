@@ -14,9 +14,8 @@ import {
   SEXES,
   SOUS_SYSTEMES,
   USAGE_DON_MAX,
-  BIRTH_MAX,
-  BIRTH_MIN,
 } from "./constants"
+import { isBirthDateOutOfRange } from "./birth"
 import { normalizeCameroonPhone } from "./phone"
 
 export type BravoUtm = {
@@ -48,9 +47,8 @@ const requiredTrue = (message: string) =>
 export const bravoFormSchema = z.object({
   candidat_nom: requiredText("Indiquez le nom de famille."),
   candidat_prenom: requiredText("Indiquez le prénom."),
-  candidat_naissance: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Indiquez une date de naissance valide."),
+  candidat_naissance: requiredText("Indiquez votre date de naissance.")
+    .max(40, "La date de naissance est trop longue."),
   candidat_sexe: requiredEnum(SEXES, "Indiquez le sexe."),
   candidat_whatsapp: requiredPhone(
     "Indiquez un numéro WhatsApp camerounais (+237 6XX XX XX XX)."
@@ -328,7 +326,7 @@ export function parseBravoApplication(input: Record<string, unknown>): BravoPars
       parent_whatsapp,
       utm: readUtm(input),
       alerte_numeros_identiques: candidat_whatsapp === parent_momo,
-      verif_age: data.candidat_naissance < BIRTH_MIN || data.candidat_naissance > BIRTH_MAX,
+      verif_age: isBirthDateOutOfRange(data.candidat_naissance),
     },
   }
 }
