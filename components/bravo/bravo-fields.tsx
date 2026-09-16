@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react"
 
-import { Field, SelectControl, fieldControlClass } from "@/components/forms/field"
+import { Field, SelectControl, fieldControlClass, fieldDescribedBy } from "@/components/forms/field"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
@@ -11,6 +11,7 @@ export function ChoiceGroup({
   onChange,
   error,
   columns = 1,
+  labelledBy,
 }: {
   name: string
   value: string
@@ -18,9 +19,17 @@ export function ChoiceGroup({
   onChange: (value: string) => void
   error?: string
   columns?: 1 | 2
+  labelledBy?: string
 }) {
+  const errorId = error ? `${name}-error` : undefined
   return (
-    <div className="grid gap-2">
+    <div
+      className="grid gap-2"
+      role="radiogroup"
+      aria-labelledby={labelledBy}
+      aria-invalid={error ? true : undefined}
+      aria-describedby={errorId}
+    >
       <div className={cn("grid gap-2", columns === 2 && "sm:grid-cols-2")}>
         {options.map((option) => {
           const selected = value === option
@@ -50,7 +59,7 @@ export function ChoiceGroup({
         })}
       </div>
       {error ? (
-        <p className="text-sm leading-relaxed text-red-700" role="alert">
+        <p id={errorId} className="text-sm leading-relaxed text-red-700" role="alert">
           {error}
         </p>
       ) : null}
@@ -71,6 +80,7 @@ export function CheckRow({
   error?: string
   children: ReactNode
 }) {
+  const errorId = error ? `${id}-error` : undefined
   return (
     <div className="grid gap-2">
       <label
@@ -85,12 +95,14 @@ export function CheckRow({
           type="checkbox"
           checked={checked}
           onChange={(event) => onChange(event.target.checked)}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={errorId}
           className="mt-1 size-5 shrink-0 accent-teal"
         />
         <span>{children}</span>
       </label>
       {error ? (
-        <p className="text-sm leading-relaxed text-red-700" role="alert">
+        <p id={errorId} className="text-sm leading-relaxed text-red-700" role="alert">
           {error}
         </p>
       ) : null}
@@ -118,6 +130,7 @@ export function TextField({
         id={id}
         name={id}
         aria-invalid={error ? true : undefined}
+        aria-describedby={fieldDescribedBy(id, hint, error)}
         className={cn(fieldControlClass, error && "border-red-300")}
         {...props}
       />
@@ -151,6 +164,7 @@ export function SelectField({
         name={id}
         value={value}
         aria-invalid={error ? true : undefined}
+        aria-describedby={fieldDescribedBy(id, hint, error)}
         onChange={(event) => onChange(event.target.value)}
         className={error ? "border-red-300" : undefined}
       >

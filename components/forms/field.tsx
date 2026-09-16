@@ -8,6 +8,10 @@ export const fieldControlClass =
 export const fieldAreaClass =
   "min-h-40 w-full resize-y rounded-xl border border-ink/12 bg-white px-4 py-3 text-base leading-relaxed text-ink outline-none transition placeholder:text-ink/35 focus-visible:border-teal/55 focus-visible:ring-2 focus-visible:ring-teal/20"
 
+export function fieldDescribedBy(id: string, hint?: string, error?: string) {
+  return [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined
+}
+
 export function Field({
   id,
   label,
@@ -29,9 +33,13 @@ export function Field({
         {label}
       </label>
       {children}
-      {hint ? <p className="text-sm leading-relaxed text-ink/50">{hint}</p> : null}
+      {hint ? (
+        <p id={`${id}-hint`} className="text-sm leading-relaxed text-ink/50">
+          {hint}
+        </p>
+      ) : null}
       {error ? (
-        <p className="text-sm leading-relaxed text-red-700" role="alert">
+        <p id={`${id}-error`} className="text-sm leading-relaxed text-red-700" role="alert">
           {error}
         </p>
       ) : null}

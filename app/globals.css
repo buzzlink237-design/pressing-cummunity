@@ -142,6 +142,10 @@
     scroll-snap-type: y mandatory;
     max-width: 100vw;
   }
+  /* Long forms (e.g. BRAVO candidature) must scroll freely — no section snap. */
+  html:has([data-no-scroll-snap]) {
+    scroll-snap-type: none;
+  }
   body {
     @apply bg-background text-foreground text-base sm:text-lg leading-relaxed;
     overflow-x: clip;

@@ -33,6 +33,10 @@ function rememberUtm(incoming: BravoUtm): BravoUtm {
   }
 }
 
+function scrollToCandidature() {
+  document.getElementById("candidature")?.scrollIntoView({ behavior: "smooth", block: "start" })
+}
+
 type Step = "intro" | "form" | "confirm"
 
 export function BravoCampaign({
@@ -50,12 +54,12 @@ export function BravoCampaign({
   function startForm() {
     setResolvedUtm(rememberUtm(utm))
     setStep("form")
-    document.getElementById("candidature")?.scrollIntoView({ behavior: "smooth" })
+    requestAnimationFrame(() => scrollToCandidature())
   }
 
   return (
-    <StackTrack>
-      <StackPanel theme="black" flush>
+    <StackTrack data-no-scroll-snap>
+      <StackPanel theme="black" flush snap={false}>
         <ImageField name="youth" label="BRAVO 2026" priority />
         <PanelContent className="items-center justify-end text-center">
           <FadeIn>
@@ -85,12 +89,18 @@ export function BravoCampaign({
         </PanelContent>
       </StackPanel>
 
-      <StackPanel id="candidature" theme="white" pin={false} className="scroll-mt-[var(--header-height)]">
-        <div className="mx-auto w-full max-w-6xl px-4 pt-[calc(var(--header-height)+1rem)] pb-16 sm:px-6 sm:pb-20 md:px-12">
+      <StackPanel
+        id="candidature"
+        theme="white"
+        pin={false}
+        snap={false}
+        className="scroll-mt-[var(--header-height)]"
+      >
+        <div className="mx-auto w-full max-w-6xl px-4 pt-[calc(var(--header-height)+1rem)] pb-28 sm:px-6 sm:pb-20 md:px-12">
           {step === "intro" ? <BravoIntro status={status} onStart={startForm} /> : null}
 
           {step === "form" ? (
-            <div className="mx-auto max-w-xl rounded-[1.6rem] bg-white p-5 ring-1 ring-ink/8 sm:rounded-[1.85rem] sm:p-8">
+            <div className="mx-auto max-w-xl rounded-[1.25rem] bg-white p-4 ring-1 ring-ink/8 sm:rounded-[1.85rem] sm:p-8">
               <BravoForm
                 utm={resolvedUtm}
                 canSubmit={status === "open"}
@@ -111,14 +121,14 @@ export function BravoCampaign({
                   } catch {
                     /* ignore */
                   }
-                  document.getElementById("candidature")?.scrollIntoView({ behavior: "smooth" })
+                  requestAnimationFrame(() => scrollToCandidature())
                 }}
               />
             </div>
           ) : null}
 
           {step === "confirm" ? (
-            <div className="mx-auto max-w-xl rounded-[1.6rem] bg-white p-5 ring-1 ring-ink/8 sm:rounded-[1.85rem] sm:p-8">
+            <div className="mx-auto max-w-xl rounded-[1.25rem] bg-white p-4 ring-1 ring-ink/8 sm:rounded-[1.85rem] sm:p-8">
               <BravoConfirm
                 numero={numero}
                 copy={copy}

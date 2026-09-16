@@ -1,10 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { Field, fieldAreaClass, fieldControlClass } from "@/components/forms/field"
+import { Field, fieldAreaClass, fieldControlClass, fieldDescribedBy } from "@/components/forms/field"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -82,8 +82,11 @@ export function BravoForm({
   onSubmitted: (result: { numero: string; prenom: string }) => void
 }) {
   const [section, setSection] = useState(0)
+  const [furthest, setFurthest] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [honeypot, setHoneypot] = useState("")
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const formTopRef = useRef<HTMLDivElement>(null)
 
   const form = useForm<BravoFormInput>({
     resolver: zodResolver(bravoFormSchema),
@@ -119,6 +122,37 @@ export function BravoForm({
   const current = SECTIONS[section]
   const last = section === SECTIONS.length - 1
 
+  function focusSection() {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    formTopRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    })
+    requestAnimationFrame(() => headingRef.current?.focus({ preventScroll: true }))
+  }
+
+  function focusFirstInvalid(fields: readonly (keyof BravoFormInput)[]) {
+    for (const name of fields) {
+      const state = form.getFieldState(name)
+      if (!state.error) continue
+      const id = String(name)
+      const el =
+        document.getElementById(id) ||
+        (document.querySelector(`input[name="${id}"]`) as HTMLElement | null) ||
+        (document.querySelector(`select[name="${id}"]`) as HTMLElement | null) ||
+        (document.querySelector(`textarea[name="${id}"]`) as HTMLElement | null)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" })
+        if ("focus" in el) el.focus({ preventScroll: true })
+        return
+      }
+    }
+  }
+
+  useEffect(() => {
+    focusSection()
+  }, [section])
+
   async function goNext() {
     const fields = [...BRAVO_SECTION_FIELDS[section]]
     const ok = await trigger(fields)
@@ -127,19 +161,27 @@ export function BravoForm({
         .map((name) => form.getFieldState(name).error?.message)
         .find(Boolean)
       setError(message || "Complétez cette section.")
+      focusFirstInvalid(fields)
       return
     }
     setError(null)
     persistDraft(form.getValues())
-    setSection((currentSection) => Math.min(currentSection + 1, SECTIONS.length - 1))
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    const next = Math.min(section + 1, SECTIONS.length - 1)
+    setFurthest((prev) => Math.max(prev, next))
+    setSection(next)
   }
 
   function goBack() {
     setError(null)
     persistDraft(form.getValues())
     setSection((currentSection) => Math.max(currentSection - 1, 0))
-    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  function goToSection(index: number) {
+    if (index < 0 || index > furthest || index === section) return
+    setError(null)
+    persistDraft(form.getValues())
+    setSection(index)
   }
 
   const onValid = handleSubmit(async (values) => {
@@ -176,6 +218,7 @@ export function BravoForm({
   return (
     <form
       className="mx-auto max-w-xl"
+      aria-labelledby="bravo-section-title"
       onChange={() => persistDraft(form.getValues())}
       onSubmit={(event) => {
         event.preventDefault()
@@ -184,16 +227,76 @@ export function BravoForm({
       }}
       noValidate
     >
-      <div className="mb-6">
+      <div
+        ref={formTopRef}
+        className="sticky top-[var(--header-height)] z-20 -mx-4 mb-6 border-b border-ink/8 bg-white/95 px-4 py-3 backdrop-blur-md sm:-mx-8 sm:px-8"
+      >
         <p className="text-[11px] font-semibold tracking-[0.2em] text-teal uppercase">
           Section {current.id} · {section + 1}/{SECTIONS.length}
         </p>
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink/10">
-          <div className="h-full rounded-full bg-teal transition-[width]" style={{ width: `${progress}%` }} />
+        <div
+          className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink/10"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={SECTIONS.length}
+          aria-valuenow={section + 1}
+          aria-label={`Progression : section ${section + 1} sur ${SECTIONS.length}`}
+        >
+          <div
+            className="h-full rounded-full bg-teal transition-[width]"
+            style={{ width: `${progress}%` }}
+          />
         </div>
-        <h2 className="mt-3 text-2xl tracking-tight text-ink">{current.title}</h2>
+
+        <nav
+          className="scrollbar-none mt-3 -mx-1 flex gap-1.5 overflow-x-auto px-1 pb-0.5"
+          aria-label="Sections du formulaire"
+        >
+          {SECTIONS.map((item, index) => {
+            const reachable = index <= furthest
+            const active = index === section
+            return (
+              <button
+                key={item.id}
+                type="button"
+                disabled={!reachable}
+                aria-current={active ? "step" : undefined}
+                aria-label={`Section ${item.id} : ${item.title}`}
+                onClick={() => goToSection(index)}
+                className={cn(
+                  "shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition",
+                  active
+                    ? "bg-teal text-white"
+                    : reachable
+                      ? "bg-ink/6 text-ink hover:bg-ink/10"
+                      : "cursor-not-allowed bg-ink/4 text-ink/30"
+                )}
+              >
+                <span className="sm:hidden">{item.id}</span>
+                <span className="hidden sm:inline">
+                  {item.id}. {item.title}
+                </span>
+              </button>
+            )
+          })}
+        </nav>
+
+        <h2
+          id="bravo-section-title"
+          ref={headingRef}
+          tabIndex={-1}
+          className="mt-3 text-2xl tracking-tight text-ink outline-none"
+        >
+          {current.title}
+        </h2>
       </div>
 
+      <div
+        key={current.id}
+        role="group"
+        aria-labelledby="bravo-section-title"
+        className="min-h-[12rem]"
+      >
       {section === 0 ? (
         <div className="grid gap-4">
           <TextField
@@ -218,6 +321,12 @@ export function BravoForm({
             <Input
               id="candidat_naissance"
               type="date"
+              aria-invalid={errors.candidat_naissance ? true : undefined}
+              aria-describedby={fieldDescribedBy(
+                "candidat_naissance",
+                undefined,
+                errors.candidat_naissance?.message
+              )}
               className={cn(fieldControlClass, errors.candidat_naissance && "border-red-300")}
               {...register("candidat_naissance")}
             />
@@ -545,6 +654,12 @@ export function BravoForm({
               id="usage_don"
               maxLength={USAGE_DON_MAX}
               rows={4}
+              aria-invalid={errors.usage_don ? true : undefined}
+              aria-describedby={fieldDescribedBy(
+                "usage_don",
+                `${usageDon.length}/${USAGE_DON_MAX}`,
+                errors.usage_don?.message
+              )}
               className={cn(fieldAreaClass, "min-h-32", errors.usage_don && "border-red-300")}
               {...register("usage_don")}
             />
@@ -559,6 +674,12 @@ export function BravoForm({
               id="reussir"
               maxLength={REUSSIR_MAX}
               rows={3}
+              aria-invalid={errors.reussir ? true : undefined}
+              aria-describedby={fieldDescribedBy(
+                "reussir",
+                `${reussir.length}/${REUSSIR_MAX}`,
+                errors.reussir?.message
+              )}
               className={cn(fieldAreaClass, "min-h-24", errors.reussir && "border-red-300")}
               {...register("reussir")}
             />
@@ -645,6 +766,7 @@ export function BravoForm({
           </p>
         </div>
       ) : null}
+      </div>
 
       <input
         type="text"
@@ -658,14 +780,19 @@ export function BravoForm({
       />
 
       {error ? (
-        <p className="mt-5 text-base text-red-700" role="alert">
+        <p id="bravo-form-error" className="mt-5 text-base text-red-700" role="alert">
           {error}
         </p>
       ) : null}
 
       {last && !canSubmit && showCountdown ? <BravoCountdown className="mt-7" /> : null}
 
-      <div className={cn("flex flex-col gap-3 sm:flex-row", last && !canSubmit && showCountdown ? "mt-4" : "mt-7")}>
+      <div
+        className={cn(
+          "sticky bottom-0 z-20 -mx-4 mt-7 flex flex-col gap-3 border-t border-ink/8 bg-white/95 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] backdrop-blur-md sm:static sm:mx-0 sm:flex-row sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none",
+          last && !canSubmit && showCountdown && "mt-4"
+        )}
+      >
         {section > 0 ? (
           <Button
             type="button"

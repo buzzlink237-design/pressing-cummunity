@@ -7,6 +7,8 @@ export type StackPanelProps = {
   theme?: ViewportTheme
   flush?: boolean
   pin?: boolean
+  /** Vertical scroll-snap for this panel. Disable on long forms / application flows. */
+  snap?: boolean
   className?: string
   children: React.ReactNode
 }
@@ -16,6 +18,7 @@ export function StackPanel({
   theme = "white",
   flush = true,
   pin = true,
+  snap = true,
   className,
   children,
 }: StackPanelProps) {
@@ -25,9 +28,10 @@ export function StackPanel({
       data-stack-panel
       data-theme={theme}
       className={cn(
-        "relative w-full min-h-svh snap-start",
+        "relative w-full min-h-svh",
+        snap && "snap-start",
         pin
-          ? "h-svh max-h-svh overflow-hidden snap-always"
+          ? cn("h-svh max-h-svh overflow-hidden", snap && "snap-always")
           : "overflow-visible",
         !flush && "rounded-t-[2rem] shadow-[0_-18px_50px_rgba(0,0,0,0.18)]",
         themeClass(theme),
