@@ -1,9 +1,9 @@
 export const BRAVO_TIMEZONE = "Africa/Douala"
 
-/** Monday 21 September 2026, 00:00 WAT */
+/** Monday 21 September 2026, 00:00 WAT (kept for display / countdown helpers). */
 export const BRAVO_OPENS_AT = "2026-09-21T00:00:00+01:00"
 
-/** Closes Friday 25 September at midnight WAT (start of 26 Sept, day of the live). */
+/** Original close: Friday 25 September at midnight WAT. Window gating is disabled. */
 export const BRAVO_CLOSES_AT = "2026-09-26T00:00:00+01:00"
 
 export type BravoWindowStatus = "soon" | "open" | "closed"
@@ -16,14 +16,8 @@ export type BravoCountdown = {
   seconds: number
 }
 
-export function isBravoForceOpen() {
-  return process.env.NEXT_PUBLIC_BRAVO_FORCE_OPEN === "1"
-}
-
-export function getBravoWindow(now = Date.now()): BravoWindowStatus {
-  if (isBravoForceOpen()) return "open"
-  if (now < Date.parse(BRAVO_OPENS_AT)) return "soon"
-  if (now >= Date.parse(BRAVO_CLOSES_AT)) return "closed"
+/** Candidatures stay open — no open/close date gate. */
+export function getBravoWindow(_now = Date.now()): BravoWindowStatus {
   return "open"
 }
 
